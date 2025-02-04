@@ -41,7 +41,7 @@ int login()
     scanf("%s", input_password);
 
     int count = 0;
-    while (input_username != user && input_password != password && count < 2)
+    while (!(strcmp(username, input_username) == 0 && strcmp(input_password, password) == 0) && count < 2)
     {
         printf("Enter your username: ");
         scanf("%s", input_username);
@@ -50,17 +50,17 @@ int login()
         count++;
     }
 
-    if (input_username == "user" && input_password == "pass")
+    if (strcmp(input_username, "user") == 0 && strcmp(input_password, "pass") == 0)
     {
         printf("Enter your username (you were using default): ");
         scanf("%s", input_username);
         printf("Enter your password (you were using default): ");
         scanf("%s", input_password);
-        return 1
+        return 1;
     }
-    if (input_username == username && input_password == password)
+    if (strcmp(input_username, username) == 0 && strcmp(input_password, password) == 0)
     {
-        return 1
+        return 1;
     }
     // TODO: use a loop to check username and password
     // If the user enters the wrong username or password 3 times, return 0
@@ -130,7 +130,7 @@ int main()
                 return 1;
             }
             logged_in = 1;
-            printf("Welcome, %s", username)
+            printf("Welcome, %s", username);
         }
 
         // Main menu
@@ -138,20 +138,26 @@ int main()
         switch (choice)
         {
         case 1:
-            plus_game() break;
+            plus_game();
+            break;
         case 2:
-            minus_game() break;
+            minus_game();
+            break;
         case 3:
-            multiply_game() break;
+            multiply_game();
+            break;
         case 4:
-            divide_game() break;
+            divide_game();
+            break;
         case 5:
-            change_username() break;
+            change_username();
+            break;
         case 6:
-            change_password() break;
+            change_password();
+            break;
         case 7:
-            printf("You logged out!")
-                logged_in = 0;
+            printf("You logged out!");
+            logged_in = 0;
             if (!logged_in)
             {
                 // Login process
@@ -162,11 +168,12 @@ int main()
                     return 1;
                 }
                 logged_in = 1;
-                printf("Welcome, %s", username)
+                printf("Welcome, %s", username);
             }
             break;
         case 8:
-            printf("Exited game. Thanks for playing!") break;
+            printf("Exited game. Thanks for playing!");
+            break;
         }
     }
 
