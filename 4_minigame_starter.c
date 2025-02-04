@@ -49,12 +49,17 @@ int login()
         scanf("%s", input_password);
         count++;
     }
+
     if (input_username == "user" && input_password == "pass")
     {
         printf("Enter your username (you were using default): ");
         scanf("%s", input_username);
         printf("Enter your password (you were using default): ");
         scanf("%s", input_password);
+        return 1
+    }
+    if (input_username == username && input_password == password)
+    {
         return 1
     }
     // TODO: use a loop to check username and password
@@ -99,10 +104,14 @@ void divide_game()
 
 void change_username()
 {
+    printf("Enter your username: ");
+    scanf("%s", username);
 }
 
 void change_password()
 {
+    printf("Enter your password: ");
+    scanf("%s", password);
 }
 
 int main()
@@ -121,13 +130,44 @@ int main()
                 return 1;
             }
             logged_in = 1;
-            // TODO: print "welcone, <username>"
+            printf("Welcome, %s", username)
         }
 
         // Main menu
         int choice = main_menu();
-        // TODO: check user's choice and invoke the corresponding function
-        // If the user has entered an invalid choice, print "Invalid choice"
+        switch (choice)
+        {
+        case 1:
+            plus_game() break;
+        case 2:
+            minus_game() break;
+        case 3:
+            multiply_game() break;
+        case 4:
+            divide_game() break;
+        case 5:
+            change_username() break;
+        case 6:
+            change_password() break;
+        case 7:
+            printf("You logged out!")
+                logged_in = 0;
+            if (!logged_in)
+            {
+                // Login process
+                printf("Please login\n");
+                if (!login())
+                {
+                    printf("Login failed\n");
+                    return 1;
+                }
+                logged_in = 1;
+                printf("Welcome, %s", username)
+            }
+            break;
+        case 8:
+            printf("Exited game. Thanks for playing!") break;
+        }
     }
 
     return 0;
